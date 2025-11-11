@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Портфолио — Графикалық дизайнер</title>
+  <style>
+    :root{
+      --bg:#0f1724; /* темір фон */
+      --card:#0b1220;
+      --muted: #9aa4b2;
+      --accent: #6ee7b7;
+      --gap: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#071021 0%, var(--bg) 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+    }
+    header{
+      padding:24px 20px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      position:sticky;
+      top:0;
+      backdrop-filter: blur(6px);
+      background:linear-gradient(180deg, rgba(7,16,33,0.6), rgba(7,16,33,0.3));
+      z-index:50;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px
+    }
+    .logo{
+      width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#60a5fa);
+      display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#04202a
+    }
+    h1{font-size:18px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+
+    main{padding:28px 20px 60px}
+
+    /* Grid of banners. Each banner keeps 9:16 (1080x1920) aspect ratio
+       Use aspect-ratio so it displays correctly on modern browsers */
+    .grid{
+      display:grid;
+      gap:var(--gap);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:10px;
+      box-shadow: 0 6px 20px rgba(2,6,23,0.7);
+      transition: transform .18s ease, box-shadow .18s ease;
+      display:flex;flex-direction:column;gap:10px;
+      align-items:center;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(2,6,23,0.9)}
+
+    .banner{
+      width:100%;
+      aspect-ratio:9/16; /* preserves 1080x1920 -> 9:16 */
+      overflow:hidden;
+      border-radius:10px;
+      display:block;
+      background:#08111a center/cover no-repeat;
+      position:relative;
+    }
+    .banner img{
+      width:100%;height:100%;object-fit:cover;display:block;
+    }
+    .meta{width:100%;display:flex;justify-content:space-between;align-items:center;padding:0 6px}
+    .meta .name{font-size:13px;font-weight:600}
+    .meta .format{font-size:12px;color:var(--muted)}
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:2000;
+      background: linear-gradient(180deg, rgba(2,6,23,0.85), rgba(2,6,23,0.95));
+      padding:20px
+    }
+    .lightbox.open{display:flex}
+    .lightbox-content{max-width:720px;width:100%;max-height:90vh;display:flex;align-items:center;justify-content:center;position:relative}
+    .lightbox img{max-width:100%;max-height:90vh;object-fit:contain;border-radius:8px}
+    .close, .prev, .next{
+      position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;cursor:pointer;color:#fff;font-weight:700
+    }
+    .close{right:16px;top:16px;transform:none}
+    .prev{left:-60px}
+    .next{right:-60px}
+
+    @media (max-width:800px){
+      .prev{left:8px}
+      .next{right:8px}
+      .lightbox-content{max-width:100%}
+    }
+
+    footer{padding:24px 20px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Small helper for uploading note */
+    .note{margin:12px 0 18px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">N</div>
+      <div>
+        <h1>Нурхат - Портфолио</h1>
+        <p class="lead">Креативтер</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+
+    <section class="grid" id="gallery">
+      <!-- Әр баннер үшін .card элементін қайталаңыз -->
+      <div class="card">
+        <a class="banner" href="#" data-index="0">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\2сынып2.jpg" alt="Banner 1" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="1">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\314-3.png" alt="Banner 2" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="2">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\OnlineSabaq1.jpg" alt="Banner 3" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="3">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\TALIM4.png" alt="Banner 4" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="4">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\АбаяМАД1.png" alt="Banner 5" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\АбаяМАД2.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\Агылшын1.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\Агылшын5.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\АғылшынРозыбакиева2.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\Академбала3баннер.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\Массаж1.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\Косметолог1.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\БОТОКС1.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\АкадембалаСадик2.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\Академбала3баннер2.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+      <div class="card">
+        <a class="banner" href="#" data-index="5">
+          <img data-src="C:\Users\Nurhat\OneDrive\Рабочий стол\Figma\Баннерлер\Математика7.png" alt="" loading="lazy">
+        </a>
+        <div class="meta"><div class="name"></div><div class="format">1080×1920 · JPG/PNG</div></div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-content">
+      <button class="close" id="lbClose" aria-label="Close">✕</button>
+      <button class="prev" id="lbPrev" aria-label="Previous">‹</button>
+      <img id="lbImage" src="" alt="" />
+      <button class="next" id="lbNext" aria-label="Next">›</button>
+    </div>
+  </div>
+
+
+
+  <script>
+    // Simple lazy loader + lightbox behavior
+    const imgs = Array.from(document.querySelectorAll('.banner img'));
+    // load images from data-src
+    imgs.forEach(img => {
+      const src = img.getAttribute('data-src');
+      if(src){ img.src = src; }
+    });
+
+    // lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImage = document.getElementById('lbImage');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+
+    const banners = Array.from(document.querySelectorAll('.banner'));
+    let current = 0;
+
+    function openLightbox(index){
+      const img = banners[index].querySelector('img');
+      lbImage.src = img.src;
+      lbImage.alt = img.alt || '';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      current = index;
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lbImage.src = '';
+    }
+    function showNext(){ openLightbox((current+1) % banners.length); }
+    function showPrev(){ openLightbox((current-1 + banners.length) % banners.length); }
+
+    banners.forEach((b, i)=>{
+      b.addEventListener('click', (e)=>{ e.preventDefault(); openLightbox(i); });
+    });
+    lbClose.addEventListener('click', closeLightbox);
+    lbNext.addEventListener('click', showNext);
+    lbPrev.addEventListener('click', showPrev);
+    lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+
+    // keyboard
+    document.addEventListener('keydown', (e)=>{
+      if(lightbox.classList.contains('open')){
+        if(e.key === 'Escape') closeLightbox();
+        if(e.key === 'ArrowRight') showNext();
+        if(e.key === 'ArrowLeft') showPrev();
+      }
+    });
+
+    // If you want to programmatically set filenames, edit this array and the <img data-src> in the HTML above.
+    // const filenames = ['images/banner1.jpg','images/banner2.jpg', ...];
+  </script>
+</body>
+</html>
